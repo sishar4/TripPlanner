@@ -1,21 +1,27 @@
+var http = require('http');
 var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var swig = require('swig');
 
-var routes = require('./routes/index');
+var routes = require('./routes');
 
 var app = express();
 
 app.set('views', './views');
 app.set('view engine', 'html');
 app.engine('html', swig.renderFile);
-
+swig.setDefaults({
+	cache: false
+});
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/public'));
+
+// app.use(express.static(__dirname + '/public'));
+app.use('/bootstrap',express.static(__dirname + '/node_modules/bootstrap/dist'));
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'));
 
 app.use('/', routes);
 
@@ -34,3 +40,9 @@ app.use(function(err, req, res, next) {
         // ... fill in this part
     );
 });
+
+var server = app.listen(3000, function() {
+	console.log("Server listening on port 3000");
+});
+
+
