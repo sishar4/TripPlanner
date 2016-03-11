@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "build-css": "node-sass -w -r assets/stylesheets -o stylesheets",
+    "build-css": "node-sass -w -r assets/stylesheets -o public/stylesheets",
     "start": "npm run build-css & nodemon -e html,css,js app.js"
   },
   "repository": {
