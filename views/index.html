@@ -1,22 +1,108 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-	Hotels:
-		<select>
-			{% for hotel in hotels %}
-				<option value = '{{hotel.name}}'>{{ hotel.name }}</option>
-			{% endfor %}
-		</select>
-	Activities:
-		<select>
-			{% for activity in activities %}
-				<option value = '{{activity.name}}'>{{ activity.name }}</option>
-			{% endfor %}
-		</select>
-	Restaurants:
-		<select>
-			{% for restaurant in restaurants %}
-				<option value = '{{restaurant.name}}'>{{ restaurant.name }}</option>
-			{% endfor %}
-		</select>
+<div class="row">
+    <div class="col-lg-8">
+        <div id="map-canvas">
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="panel panel-primary trip-filters">
+            <div class="panel-body">
+                <form method="POST" action="/hotel" class="form-inline">
+                    <div class="form-group">
+                        <label for="selectHotel">Hotels</label>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="selectHotelButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" name="hotel">
+                                Select a Hotel
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="selectHotel" id="selectHotelItem">
+                                {% for hotel in hotels %}
+                                    <li value="{{ hotel._id.toString() }}">{{ hotel.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!-- <select class="form-control" id="selectHotel" name="hotel">
+                            {% for hotel in hotels %}
+                                <option value="{{ hotel._id.toString() }}">{{ hotel.name }}</option>
+                            {% endfor %}
+                        </select> -->
+                    </div>
+                    <button type="submit" class="btn btn-info">+</button>
+                </form>
+                <br>
+                <form method="POST" action="/restaurant" class="form-inline">
+                    <div class="form-group">
+                        <label for="selectRestaurant">Restaurants</label>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="selectRestaurantButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" name="restaurant">
+                                Select a Restaurant
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="selectRestaurant" id="selectRestaurantItem">
+                                {% for restaurant in restaurants %}
+                                    <li value="{{ restaurant._id.toString() }}">{{ restaurant.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!-- <select class="form-control" id="selectRestaurant" name="restaurant">
+                            {% for restaurant in restaurants %}
+                                <option value="{{ restaurant._id.toString() }}">{{ restaurant.name }}</option>
+                            {% endfor %}
+                        </select> -->
+                    </div>
+                    <button type="submit" class="btn btn-info">+</button>
+                </form>
+                <br>
+                <form method="POST" action="/activity" class="form-inline">
+                    <div class="form-group">
+                        <label for="selectActivity">Activities</label>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="selectActivityButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" name="activity">
+                                Select an Activity
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="selectActivity" id="selectActivityItem">
+                                {% for activity in activities %}
+                                    <li value="{{ activity._id.toString() }}">{{ activity.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <!-- <select class="form-control" id="selectActivity" name="hotel">
+                            {% for activity in activities %}
+                                <option value="{{ activity._id.toString() }}">{{ activity.name }}</option>
+                            {% endfor %}
+                        </select> -->
+                    </div>
+                    <button type="submit" class="btn btn-info">+</button>
+                </form>
+            </div>
+        </div>
+        <div class="panel panel-primary day-of-trip">
+                <div class="panel-body">Day 2</div>
+            </div>
+        <div class="panel panel-primary trip-days">
+            <div class="panel-heading">
+                <button class="btn btn-warning btn-circle">1</button>
+                <button class="btn btn-warning btn-circle">2</button>
+                <button class="btn btn-warning btn-circle">3</button>
+            </div>
+            <div class="panel-body">
+                My Hotel
+                <ul id="added-hotels">
+                    <li class="my-trip-list-item">I am a hotel</li>
+                </ul>
+                My Restaurants
+                <ul id="added-restaurants">
+                </ul>
+                My Activities
+                <ul id="added-activities">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

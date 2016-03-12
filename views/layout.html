@@ -1,14 +1,56 @@
 <html>
 	<head>
 		<title>Trip Planner</title>
-		<link href="/stylesheets/styles.css" rel="stylesheet">
+		<link href="/stylesheets/style.css" rel="stylesheet">
+		<script src="/jquery/jquery.min.js"></script>
         <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <!-- <script src="/bootstrap/js/bootstrap.min.js"></script> 
-        <script src="/jquery/jquery.min.js"></script> -->
-	</head>
+        <script src="/bootstrap/js/bootstrap.min.js"></script> 
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaWRb5loAVrlFzt7epLLaw7mXBGrbIhSY&sensor=true"></script>
+		<script src="/scripts/maps.js"></script>
 
-	<body>
-		{% block content %}
+        <script type='text/javascript'>
+            $(window).load(function(){
+                 $(function(){
+                     $(".dropdown-menu").on("click", "li", function(event){
+                        var elemId = $(".dropdown-menu").attr('id');
+                        console.log(elemId);
+
+                        if (elemId === 'selectHotelItem') {
+                            // console.log("Selected Hotel = ", event.currentTarget.innerHTML);
+                            $("#selectHotelButton").text(event.currentTarget.innerHTML);
+                            $("#selectHotelButton").append("<span class='caret' style='paddingleft: 5px'></span>");
+                        } else if (elemId === 'selectRestaurantItem') {
+                            // console.log("Selected Restaurant = ", event.currentTarget.innerHTML);
+                            $("#selectRestaurantButton").text(event.currentTarget.innerHTML);
+                            $("#selectRestaurantButton").append("<span class='caret' style='paddingleft: 5px'></span>");
+                        } else if (elemId === 'selectActivityItem') {
+                            // console.log("Selected Activity = ", event.currentTarget.innerHTML);
+                            $("#selectActivityButton").text(event.currentTarget.innerHTML);
+                            $("#selectActivityButton").append("<span class='caret' style='paddingleft: 5px'></span>");
+                        }                        
+                     });
+                 });
+            });
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Trip Planner</a>
+                </div>
+            
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        {% block content %}
         {% endblock %}
-	</body>
+        
+    </body>
 </html>
